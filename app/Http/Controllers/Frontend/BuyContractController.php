@@ -32,8 +32,9 @@ class BuyContractController extends Controller
         else {
             $contractAddress = $data['main_contract_address'];
         }
-        $account_wallet_id = Crypt::decrypt($user->wallet_id);
-        $account_private_key = Crypt::decrypt($user->private_key);
+
+        $account_wallet_id = base64_decode($user->wallet_id);
+        $account_private_key = base64_decode($user->private_key);
         return view('frontend.buycontract')->with(['athlete'=>$athlete_data, 'provider'=>$provider, 'contractAddress'=>$contractAddress, 'account_wallet_id'=>$account_wallet_id, 'account_private_key'=>$account_private_key]);
     }
 
@@ -201,7 +202,6 @@ class BuyContractController extends Controller
     }
 
     public function showPendingForm($athlete_id) {
-        $buy_method = request()->get('buy_method');
 
         $user = \Auth::user();
         $athlete_data = Common::getAthleteInfo($athlete_id);
@@ -215,9 +215,10 @@ class BuyContractController extends Controller
         else {
             $contractAddress = $data['main_contract_address'];
         }
-        $account_wallet_id = Crypt::decrypt($user->wallet_id);
-        $account_private_key = Crypt::decrypt($user->private_key);
-        return view('frontend.pending')->with(['athlete'=>$athlete_data, 'provider'=>$provider, 'contractAddress'=>$contractAddress, 'account_wallet_id'=>$account_wallet_id, 'account_private_key'=>$account_private_key]);
+        $athlete_data['owner_name'] = 'pending';
+        $account_wallet_id = base64_decode($user->wallet_id);
+        $account_private_key = base64_decode($user->private_key);
+        return view('frontend.pending')->with(['athlete'=>$athlete_data, 'provider'=>$provider, 'athlete_id'=>$athlete_id, 'contractAddress'=>$contractAddress, 'account_wallet_id'=>$account_wallet_id, 'account_private_key'=>$account_private_key]);
 
     }
     function connect($body){

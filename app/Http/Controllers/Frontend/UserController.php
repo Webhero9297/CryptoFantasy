@@ -20,8 +20,8 @@ class UserController extends Controller
     }
     public function index() {
         $user = \Auth::user();
-        $user->wallet_id = Crypt::decrypt($user->wallet_id);
-        $user->privatekey = Crypt::decrypt($user->private_key);
+        $user->wallet_id = base64_decode($user->wallet_id);
+        $user->privatekey = base64_decode($user->private_key);
         $providerInfo = Common::getEthProvider();
         return view('frontend.useraccount')->with(['user'=>$user]);
     }
@@ -92,6 +92,7 @@ class UserController extends Controller
         $provider = $data['provider'];
         $athlete = Common::getAthleteInfo($athlete_id);
         $owner_history = Common::getOwnerHistoryOfAthlete($athlete_id);
+
         if ( $provider == 'test' ) {
             $contractAddress = $data['test_contract_address'];
         }
@@ -135,5 +136,23 @@ class UserController extends Controller
             }
         }
         return response()->json(array_reverse($ret_data));
+    }
+    public function uploadAthletePhoto() {
+        date_default_timezone_set('UTC');
+        $athleteId = request()->get('athleteId');
+        $athletePhoto = $_FILES['athlete_photo'];
+        $path = 'upload/athlete/avatar';
+        $path_parts = pathinfo($_FILES["athlete_photo"]["name"]);
+        $ext = $path_parts['extension'];
+        $new_athletephoto_name = $athleteId.".".$ext;
+        $filePath = $path .'/'.$new_athletephoto_name;
+        $tmp = $_FILES['athlete_photo']['tmp_name'];
+        if(move_uploaded_file($tmp, $filePath)) {
+            $athleteData = app(Celebrity::class)->where('_id', $athleteId)->first();
+            $athleteData->avatar_image_name = $new_athletephoto_name;
+            $athleteData->save();
+//            return redirect('myathlete/'.$athleteId);
+        }
+        return redirect()->route('dashboard');
     }
 }

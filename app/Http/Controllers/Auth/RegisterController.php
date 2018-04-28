@@ -71,8 +71,8 @@ class RegisterController extends Controller
 //        $wallet_info = $this->getNewWalletInfo();
         $address = strtolower($data['address']);
         $privatekey = $data['privatekey'];
-        $encrypted_address = Crypt::encrypt($address);
-        $encrypted_privatekey = Crypt::encrypt($privatekey);
+        $encrypted_address = base64_encode($address);
+        $encrypted_privatekey = base64_encode($privatekey);
         return User::create([
             'username' => $data['username'],
             'email' => $data['email'],

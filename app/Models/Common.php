@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Crypt;
 class Common
 {
     //
+    public static function udate($format, $utimestamp = null) {
+        date_default_timezone_set("UTC");
+        if (is_null($utimestamp))
+            $utimestamp = microtime(true);
+
+        $timestamp = floor($utimestamp);
+        $milliseconds = round(($utimestamp - $timestamp) * 1000000);
+
+        return date(preg_replace('`(?<!\\\\)u`', $milliseconds, $format), $timestamp);
+    }
     public static function getCelebrityDetailInfo( $player_id = null ) {
         $typeModel = new SportsType();
         $teamModel = new SportsTeam();
@@ -33,7 +43,10 @@ class Common
                     $ret_data['team_name'] = $team_data['team_name'];
                     $ret_data['type_id'] = $team_data['sports_type_id'];
                     $ret_data['type_name'] = $type_data['type_name'];
-                    $ret_data['avatar'] = '/upload/athlete/avatar/'.$celebrity_data['avatar_image_name'];
+                    if ( $celebrity_data['avatar_image_name'] != 'default.png' )
+                        $ret_data['avatar'] = '/upload/athlete/avatar/'.$celebrity_data['avatar_image_name'];
+                    else
+                        $ret_data['avatar'] = '/upload/athlete/'.$celebrity_data['avatar_image_name'];
                     $ret_data['price'] = $celebrity_data['price'];
                     $ret_data['purchase_price'] = $celebrity_data['purchase_price'];
                     $ret_data['origin_wallet_id'] = $celebrity_data['origin_wallet_id'];
@@ -61,7 +74,10 @@ class Common
             $ret_data['team_name'] = $team_data['team_name'];
             $ret_data['type_id'] = $team_data['sports_type_id'];
             $ret_data['type_name'] = $type_data['type_name'];
-            $ret_data['avatar'] = '../upload/athlete/avatar/'.$celebrity_data['avatar_image_name'];
+            if ( $celebrity_data['avatar_image_name'] != 'default.png' )
+                $ret_data['avatar'] = '/upload/athlete/avatar/'.$celebrity_data['avatar_image_name'];
+            else
+                $ret_data['avatar'] = '/upload/athlete/'.$celebrity_data['avatar_image_name'];
             $ret_data['price'] = $celebrity_data['price'];
             $ret_data['purchase_price'] = $celebrity_data['purchase_price'];
             $ret_data['origin_wallet_id'] = $celebrity_data['origin_wallet_id'];
@@ -99,7 +115,10 @@ class Common
                     $ret_data['team_name'] = $team_data['team_name'];
                     $ret_data['type_id'] = $team_data['sports_type_id'];
                     $ret_data['type_name'] = $type_data['type_name'];
-                    $ret_data['avatar'] = '../upload/athlete/avatar/'.$celebrity_data['avatar_image_name'];
+                    if ( $celebrity_data['avatar_image_name'] != 'default.png' )
+                        $ret_data['avatar'] = '/upload/athlete/avatar/'.$celebrity_data['avatar_image_name'];
+                    else
+                        $ret_data['avatar'] = '/upload/athlete/'.$celebrity_data['avatar_image_name'];
                     $ret_data['price'] = $celebrity_data['price'];
                     $ret_data['purchase_price'] = $celebrity_data['purchase_price'];
                     $ret_data['origin_wallet_id'] = $celebrity_data['origin_wallet_id'];
@@ -136,7 +155,10 @@ class Common
         $ret_data['team_name'] = $team_data['team_name'];
         $ret_data['type_id'] = $team_data['sports_type_id'];
         $ret_data['type_name'] = $type_data['type_name'];
-        $ret_data['avatar'] = '../upload/athlete/avatar/'.$athlete['avatar_image_name'];
+        if ( $athlete['avatar_image_name'] != 'default.png' )
+            $ret_data['avatar'] = '/upload/athlete/avatar/'.$athlete['avatar_image_name'];
+        else
+            $ret_data['avatar'] = '/upload/athlete/'.$athlete['avatar_image_name'];
         $ret_data['price'] = $athlete['price'];
         $ret_data['purchase_price'] = $athlete['purchase_price'];
         $ret_data['origin_wallet_id'] = $athlete['origin_wallet_id'];
@@ -198,7 +220,10 @@ class Common
                     $_athlete['owner_name'] = $owner['username'];
                     $_athlete['player_name'] = $player_info['player_name'];
                     $_athlete['team_name'] = $team_info['team_name'];
-                    $_athlete['avatar'] = '../upload/athlete/avatar/'.$_athlete['avatar_image_name'];
+                    if ( $athlete['avatar_image_name'] != 'default.png' )
+                        $ret_data['avatar'] = '/upload/athlete/avatar/'.$athlete['avatar_image_name'];
+                    else
+                        $ret_data['avatar'] = '/upload/athlete/'.$athlete['avatar_image_name'];
                     (isset($athlete['token_id'])) ? $_athlete['token_id'] = $athlete['token_id'] : $_athlete['token_id'] = 'NotAllowed';
                     (isset($athlete['txHash'])) ? $_athlete['txHash'] = $athlete['txHash'] : $_athlete['txHash'] = 'NotAllowed';
                     $ret_arr[] = $_athlete;
@@ -245,7 +270,10 @@ class Common
                 $ret_data['team_name'] = $team_data['team_name'];
                 $ret_data['type_id'] = $team_data['sports_type_id'];
                 $ret_data['type_name'] = $type_data['type_name'];
-                $ret_data['avatar'] = '/upload/athlete/avatar/'.$celebrity_data['avatar_image_name'];
+                if ( $celebrity_data['avatar_image_name'] != 'default.png' )
+                    $ret_data['avatar'] = '/upload/athlete/avatar/'.$celebrity_data['avatar_image_name'];
+                else
+                    $ret_data['avatar'] = '/upload/athlete/'.$celebrity_data['avatar_image_name'];
                 $ret_data['price'] = $celebrity_data['price'];
                 $ret_data['purchase_price'] = $celebrity_data['purchase_price'];
                 $ret_data['origin_wallet_id'] = $celebrity_data['origin_wallet_id'];
@@ -393,7 +421,10 @@ class Common
             $ret_data['team_name'] = $team_data['team_name'];
             $ret_data['type_id'] = $team_data['sports_type_id'];
             $ret_data['type_name'] = $type_data['type_name'];
-            $ret_data['avatar'] = '../upload/athlete/avatar/'.$data['avatar_image_name'];
+            if ( $data['avatar_image_name'] != 'default.png' )
+                $ret_data['avatar'] = '/upload/athlete/avatar/'.$data['avatar_image_name'];
+            else
+                $ret_data['avatar'] = '/upload/athlete/'.$data['avatar_image_name'];
             $ret_data['price'] = $data['price'];
             $ret_data['purchase_price'] = $data['purchase_price'];
             $ret_data['origin_wallet_id'] = $data['origin_wallet_id'];

@@ -24,7 +24,6 @@ class CelebrityEditorController extends Controller
         $this->middleware('auth');
     }
     public function index() {
-
         $typedata = SportsType::all()->toArray();
         $teamModel = new SportsTeam();
         $playerModel = new SportsPlayer();

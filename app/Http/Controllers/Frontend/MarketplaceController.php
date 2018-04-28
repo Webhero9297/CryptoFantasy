@@ -57,7 +57,7 @@ class MarketplaceController extends Controller
     public function showAthleteInfoByUser($user_id) {
         $userInfo = Common::getUserInfoFromId($user_id);
         $athlete = Common::getAthleteInfoOfOwner($user_id);
-        $wallet_id = Crypt::decrypt($userInfo['wallet_id']);
+        $wallet_id = base64_decode($userInfo['wallet_id']);
         $model = new BaseEthProvider();
         $data = $model->all()->first();
         $provider = $data['provider'];

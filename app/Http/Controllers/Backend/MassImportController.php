@@ -82,13 +82,13 @@ class MassImportController extends Controller
             Celebrity::truncate();
             foreach( $data as $key=>$value ) {
                 if (is_null($value->type) || $value->type=='') continue;
-                $this->image_save_from_url($value->avatar_image_link);
+//                $this->image_save_from_url($value->avatar_image_link);
                 ( isset($value->price) ) ? $price = $value->price*1 : $price = 0.001;
                 ( isset($value->ranking) ) ? $ranking = $value->ranking : $ranking = '';
                 ( isset($value->changes) ) ? $changes = $value->changes : $changes = '';
                 $athlete_record = new Celebrity();
                 $athlete_record->player_id = $new_player[$value->player];
-                $athlete_record->avatar_image_name = basename($value->avatar_image_link);
+                $athlete_record->avatar_image_name = 'default.png';//basename($value->avatar_image_link);
                 $athlete_record->price = $price;
                 $athlete_record->purchase_price = $price;
                 $athlete_record->origin_wallet_id = $value->orgin_wallet_id;
