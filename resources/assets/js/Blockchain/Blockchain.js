@@ -71,6 +71,11 @@ Athlete = {
             }
 
             self.AthleteContractInstance = new self.web3.eth.Contract(contractABI, self.contractAddress);
+//            gWeb3.eth.call({
+//                data: self.AthleteContractInstance.methods.totalSupply().encodeABI()
+//            }).then(function(result){
+//console.log(result);
+//            });
             self.AthleteContractInstance.methods.totalSupply().call().then(function(result){
                 console.log('result', result);
             });
@@ -175,42 +180,54 @@ Athlete = {
      * options - {from, value}
      * **/
     purchaseEx: function(tokenId, options, callback) {
-        purchaseObj = self.AthleteContractInstance.methods.purchase(tokenId).send({from: options.from, value: utils.toWei(options.value, 'ether')});
+        purchaseObj = self.AthleteContractInstance.methods.purchase(tokenId).send({from: options.from, value: utils.toWei(options.value.toString(), 'ether')});
         purchaseObj.on('transactionHash', function(hash){
-            //etherscanAPI.transaction.getstatus(hash).then(function(result){
-            //    console.log('confirm', result)
-            //});
-            callback(hash);
+            callback({result: 'hash', hash: hash});
         }).on('receipt', function(receipt){
-            //callback(receipt);
+            callback({result: 'receipt', receipt: receipt});
         })
-        .on('error', console.error);
+        .on('error', function(error){
+            callback({result: 'error', error: receipt});
+        });
     },
-    purchaseExWithoutMetamask :  function (tokenId, price, options, callback) {
+    purchaseExWithoutMetamask : function (tokenId, price, options, callback) {
         var fromAddress = options.address;
         var fromPrivateKey = options.privatekey;
-        var _sellPrice = price;
+        var _sellPrice = gUtils.toHex(gUtils.toWei(price.toString()));
         var gasPrice = gUtils.toHex(options.gasPrice);
         var gas = gUtils.toHex(options.gas);
 
         gWeb3.eth.getTransactionCount(fromAddress).then(function(count){
             var data = self.AthleteContractInstance.methods.purchase(tokenId).encodeABI();
             var rawTransaction = {
-                from: fromAddress, value: gUtils.toHex(gUtils.toWei(_sellPrice)), to: self.contractAddress,
+                from: fromAddress, value: _sellPrice, to: self.contractAddress,
                 nonce: gUtils.toHex(count), gasPrice: gUtils.toHex(gasPrice), gas: gUtils.toHex(gas), data: data, chainId: chainId
             };
             var privKey = new Buffer(fromPrivateKey, 'hex');
-            var tx = new  Tx(rawTransaction);
+            if ( privKey.length == 0 ) {
+                privKey = new Buffer(fromPrivateKey);
+            }
+            var tx = new Tx(rawTransaction);
             tx.sign(privKey);
             var serializedTx = tx.serialize();
-            gWeb3.eth.sendSignedTransaction('0x'+serializedTx.toString('hex'), function(err, txHash){
-                if ( err ) {
-                    callback({ result: 'fail', error: err });
-                }
-                else {
-                    callback( { result: 'success', hash: txHash });
-                }
+            gWeb3.eth.sendSignedTransaction('0x'+serializedTx.toString('hex'))
+            .on('transactionHash', function(hash){
+                callback({result: 'hash', hash:hash});
+            })
+            .on('receipt', function(receipt){
+                callback( { result: 'receipt', receipt: receipt });
+            })
+            .on('error', function(error){
+                callback( { result: 'error', error: error });
             });
+            //gWeb3.eth.sendSignedTransaction('0x'+serializedTx.toString('hex'), function(err, txHash){
+            //    if ( err ) {
+            //        callback({ result: 'fail', error: err });
+            //    }
+            //    else {
+            //        callback( { result: 'success', hash: txHash });
+            //    }
+            //});
         });
 
     },

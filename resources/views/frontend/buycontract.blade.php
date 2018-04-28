@@ -241,7 +241,8 @@
                 Purchase is now pending and will be completed shortly
             </div>
             <div class="modal-footer">
-                <button type="button" id="alertmodal_footer_buy" class="btn btn-danger" onclick="doOnBuyConfirm()">Confirm</button>
+                <button type="button" id="alertmodal_footer_buy" class="btn btn-success" onclick="doOnBuy()">Yes</button>
+                <button type="button" id="alertmodal_footer_cancel" class="btn btn-default" data-dismiss="modal">No</button>
             </div>
         </div>
 <!--  Your purchase will be in pending status until blockchain network confirmation completes. -->

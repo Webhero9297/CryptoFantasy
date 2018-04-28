@@ -51,7 +51,7 @@
 @section('content')
     <link href="{{ asset('css/frontend/marketplace.css') }}" rel="stylesheet">
 <div class="container-fluid div-page-wrap">
-    <h3 class="h-title">Dashboard</h3>
+    <h3 class="h-title">Dashboard (Total: {{ count($athletes) }})</h3>
     @if ( $athletes )
         <div class="row">
             @foreach( $athletes as $idx=>$athlete )

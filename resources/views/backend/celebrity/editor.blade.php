@@ -110,6 +110,7 @@
                                                     <div class="col-xs-12 col-sm-6 form-group ">
                                                         <button type="button" id="btn_create_token" class="btn blue btn-block btn-outline">Register Token</button>
                                                     </div>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>

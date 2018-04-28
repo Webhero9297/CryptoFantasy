@@ -7,7 +7,6 @@
 <script src="{{ asset('./assets/searchfilter/js/suggestion-box.min.js') }}"></script>
 <script>
     var obj = <?php echo json_encode($athletes); ?>;
-    console.log(obj);
 </script>
 <style>
     .right0 {

@@ -75,6 +75,23 @@
         background: #000!important;
     }
 
+    .animate-in {
+        -webkit-animation: fadeIn .5s ease-in;
+        animation: fadeIn .5s ease-in;
+    }
+    .animate-out {
+        -webkit-transition: opacity .5s;
+        transition: opacity .5s;
+        opacity: 0;
+    }
+    @-webkit-keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
     /*************************************   Megamenu Start   ******************************************/
 
     /*************************************   Megamenu End     ******************************************/
@@ -99,7 +116,6 @@
                 <button type="button" id="alertmodal_footer_cancel" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
 </div>
 <div id="app" class="app-body">
