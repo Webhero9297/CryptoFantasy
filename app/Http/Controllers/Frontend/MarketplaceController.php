@@ -82,6 +82,6 @@ class MarketplaceController extends Controller
             $contractAddress = $data['main_contract_address'];
         }
         $ret = Common::searchAthletes($filter);
-        return view('frontend.marketplace')->with(['celebrities'=>$ret, 'provider'=>$provider, 'contractAddress'=>$contractAddress]);
+        return view('frontend.marketplace')->with(['athletes'=>$ret, 'provider'=>$provider, 'contractAddress'=>$contractAddress]);
     }
 }

@@ -220,12 +220,12 @@ class Common
                     $_athlete['owner_name'] = $owner['username'];
                     $_athlete['player_name'] = $player_info['player_name'];
                     $_athlete['team_name'] = $team_info['team_name'];
-                    if ( $athlete['avatar_image_name'] != 'default.png' )
-                        $ret_data['avatar'] = '/upload/athlete/avatar/'.$athlete['avatar_image_name'];
+                    if ( $_athlete['avatar_image_name'] != 'default.png' )
+                        $_athlete['avatar'] = '/upload/athlete/avatar/'.$_athlete['avatar_image_name'];
                     else
-                        $ret_data['avatar'] = '/upload/athlete/'.$athlete['avatar_image_name'];
-                    (isset($athlete['token_id'])) ? $_athlete['token_id'] = $athlete['token_id'] : $_athlete['token_id'] = 'NotAllowed';
-                    (isset($athlete['txHash'])) ? $_athlete['txHash'] = $athlete['txHash'] : $_athlete['txHash'] = 'NotAllowed';
+                        $_athlete['avatar'] = '/upload/athlete/'.$_athlete['avatar_image_name'];
+                    (isset($_athlete['token_id'])) ? $_athlete['token_id'] = $athlete['token_id'] : $_athlete['token_id'] = 'NotAllowed';
+                    (isset($_athlete['txHash'])) ? $_athlete['txHash'] = $athlete['txHash'] : $_athlete['txHash'] = 'NotAllowed';
                     $ret_arr[] = $_athlete;
                 }
                 return $ret_arr;
