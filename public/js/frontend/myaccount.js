@@ -95,7 +95,7 @@ function copyExec(Elem) {
         Elem.readOnly = readOnly;
     }
     else {
-        input.select();
+        Elem.select();
     }
 
     //Elem.select();

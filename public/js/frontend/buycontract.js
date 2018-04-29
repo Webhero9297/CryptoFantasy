@@ -70,6 +70,10 @@ function doOnBuyContract() {
 
     //window.location.href = '/pending';
 
+    $('#confirmModal').modal('show');
+}
+function doOnBuy(){
+    $('#confirmModal').modal('hide');
     selected_chk = $('input[name="radio"]:checked').attr('id');
     $('input[name="buy_method"]').val(selected_chk);
 
@@ -88,7 +92,6 @@ function doOnBuyContract() {
         });
     }
     else {   // use account wallet address
-
         address = $('#account_wallet_id').html();
         var options = { address: address, privatekey: private_key, gasPrice: gasPrice+"0000000000", gas: gasLimit };
         Athlete.purchaseExWithoutMetamask( tokenId, sellPrice, options, function(resp){

@@ -1,6 +1,8 @@
 $(document).ready(function(){
     doOnClickAthlete();
     changeReceiveEth(price);
+
+    $('#btn_file_upload').click(doOnUpload);
 });
 
 doOnClickAthlete = function() {
@@ -26,3 +28,32 @@ changeReceiveEth = function(_price) {
     var new_price = _price*(1-(send_fee+site_fee)/100);
     $('#span_receive_eth').html(Math.round(new_price*100000)/100000);
 }
+
+/*****************************************  Avatar Editor Start *****************************************/
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#imageUpload").change(function() {
+    readURL(this);
+});
+function doOnUpload() {
+    if ( $('#imageUpload').get(0).files.length === 0 ) {
+        showDialog('CryptoFantasy', "Sorry! Please choice image avatar.");
+        return;
+    }
+    $('#upload_form').submit();
+}
+function showDialog(captionStr, bodyStr) {
+    $('#alertmodal_title').html(captionStr);
+    $('#alertmodal_body').html(bodyStr);
+    $('#alertModal').modal('show');
+}
+/*****************************************  Avatar Editor  End  *****************************************/
