@@ -12,7 +12,19 @@
     var send_fee = {{ $athlete['send_fee'] }};
     var site_fee = {{ $athlete['site_fee'] }};
 </script>
-
+<style>
+    .btn-primary {
+        color: #fff;
+        background-color: #081627;
+        border-color: #0b3146;
+    }
+    .btn-primary:hover {
+        background-color: #113448;
+    }
+    .form-group {
+        margin-bottom: 0;
+    }
+</style>
 <h3 class="h-title fontsize28" style="margin-top:50px;"> Athlete </h3>
 <div class="row" style="margin-right: -15px;">
     <div class="col-xs-12 col-sm-4">
@@ -38,9 +50,9 @@
                         </div>
                     </div>
                     <div class="div-avatar-upload">
-                        <button type="button" id="btn_file_upload">
+                        <button type="button" id="btn_file_upload" style="display: none;">
                             <i class="fa fa-cloud-upload" ></i>
-                            Upload Avatar
+                            Save Card Image
                         </button>
                     </div>
                 </form>
@@ -91,19 +103,19 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-12">
-                <form action="{{ route('changeathleteprice') }}" method="post" class="form-horizontal form-bordered crypto-form">
+            <div class="col-sm-12 text-center">
+                <form id="form_change_price" action="{{ route('changeathleteprice') }}" method="post" class="form-horizontal form-bordered crypto-form">
                     {{ csrf_field() }}
                     <div class="form-body">
                         <input type="hidden" name="athlete_id" >
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <label class="control-label" style="color: white;">Sell price</label>
+                                <label class="control-label" style="color: white;">Change sell price</label>
                                 <input type='range' id="slider_price" step="0.00001" min="0" max="1" value="0" style="margin-bottom: 25px;" oninput="showVal(this.value)" onchange="showVal(this.value)"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-xs-5">
+                            <div class="col-xs-5" style="padding-right:0;">
                                 <input id="input_price" type="text" value="0" name="price" class="form-control" style="background: transparent;text-align: right;color: white;font-family: sans-serif;" readonly>
                             </div>
                             <div class="col-xs-7">
@@ -111,7 +123,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label style="margin-left:15px;">
+                            <label style="margin: 10px;">
                                 <span class="label-title italic" >You can change the selling price between min</span>
                                 <span class="label-title italic" id="min_price"></span>
                                 <span class="label-title italic">to max</span>
@@ -120,7 +132,7 @@
                             </label>
                         </div>
                         <div class="form-group">
-                            <label class="label-title italic" style="margin-left:15px;">
+                            <label class="label-title italic" style="margin: 10px;">
                                 *You will receive <label id="span_receive_eth"></label>ETH after sell this athlete.
                             </label>
                         </div>

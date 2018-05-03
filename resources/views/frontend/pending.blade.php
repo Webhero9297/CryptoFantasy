@@ -606,7 +606,8 @@
 
                         <form id="regForm" action="/action_page.php">
                             <div class="tab">
-                                <h3>Please choose one of metamask and account:</h3>
+                                <h3>Please choose to purchase using MetaMask Wallet or this Account Wallet.
+                                    Please make sure you transfer ETH to your Account Wallet first if you choose to use your Account Wallet.</h3>
                                 <div class="alert invisible" id="div_alert">
                                     {{--<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>--}}
                                     <strong>Warning!</strong> MetMask not Installed or not logged-in. Please make sure MetaMask is installed and logged-in and refresh this browser again.
@@ -841,18 +842,18 @@
             return false;
         }
         if ( currentTab == 1 ) {
-            if ( _buyMethod == 'account' ) {
-                address = $('#account_address').html();
-                var options = { address: address, privatekey: private_key, gasPrice: gasPrice+"0000000000", gas: gasLimit };
-                Athlete.purchaseExWithoutMetamask( tokenId, athlete_price, options, function(receipt){
-                    procBlockchainResult(receipt);
-                });
-            }
-            if ( _buyMethod == 'metamask' ) {
-                Athlete.purchaseEx(tokenId, {from: fromAddress, value:athlete_price }, function(receipt){
-                    procBlockchainResult(receipt);
-                });
-            }
+//            if ( _buyMethod == 'account' ) {
+//                address = $('#account_address').html();
+//                var options = { address: address, privatekey: private_key, gasPrice: gasPrice+"0000000000", gas: gasLimit };
+//                Athlete.purchaseExWithoutMetamask( tokenId, athlete_price, options, function(receipt){
+//                    procBlockchainResult(receipt);
+//                });
+//            }
+//            if ( _buyMethod == 'metamask' ) {
+//                Athlete.purchaseEx(tokenId, {from: fromAddress, value:athlete_price }, function(receipt){
+//                    procBlockchainResult(receipt);
+//                });
+//            }
         }
         showTab(currentTab);
     }

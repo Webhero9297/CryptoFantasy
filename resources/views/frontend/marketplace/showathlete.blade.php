@@ -55,7 +55,7 @@
         float: left;
         color: #999;
     }
-    form.form-chat input[type=text] {
+    input[type=text] {
         padding: 5px;
         font-size: 17px;
         border: 1px solid grey;
@@ -65,7 +65,7 @@
         background: transparent;
     }
 
-    form.form-chat button {
+    button {
         float: left;
         width: 20%;
         padding: 5px;
@@ -77,11 +77,11 @@
         cursor: pointer;
     }
 
-    form.form-chat button:hover {
+    button:hover {
         background: #0b7dda;
     }
 
-    form.form-chat::after {
+    .form-chat::after {
         content: "";
         clear: both;
         display: table;
@@ -144,10 +144,10 @@
                             <div class="message-wraper">
                             </div>
                             <div class="chat-edit-message">
-                                <form class="form-chat">
-                                    <input type="text" name="message" placeholder="Write a message">
+                                <div class="form-chat">
+                                    <input type="text" name="message" placeholder="Write a message" >
                                     <button type="button" onclick="doOnSendMessage()">Send</button>
-                                </form>
+                                </div>
                             </div>
                         </div>
                 @endif
@@ -233,5 +233,12 @@
     </div>
 </div>
 <script src="{{ asset('./js/frontend/chat.js') }}" ></script>
+<script>
+    $('.btn-bottom-athlete').click(function(){
+        window.location.href = $(this).attr('a-href');
+    });
+
+
+</script>
 {{--<script src="{{ asset('./js/app.js') }}" ></script>--}}
 @endsection
