@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Auth\RedirectsUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 trait AuthenticatesUser
 {
-//    use RedirectsUsers, ThrottlesLogins;
+    use RedirectsUsers, ThrottlesLogins;
 
     /**
      * Show the application's login form.
@@ -57,7 +59,7 @@ trait AuthenticatesUser
         return redirect()->back()->withInput();
 
 //        $this->validateLogin($request);
-//
+
 //        // If the class is using the ThrottlesLogins trait, we can automatically throttle
 //        // the login attempts for this application. We'll key this by the username and
 //        // the IP address of the client making these requests into this application.
@@ -90,9 +92,7 @@ trait AuthenticatesUser
         $useremail = $request->input('email');
         $password = $request->input('password');
         $field = filter_var($useremail, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-//dd($request, $field);
         $this->validate($request, [
-//            $this->username() => 'required|string',
             $field => 'required|string',
             'password' => 'required|string',
         ]);
