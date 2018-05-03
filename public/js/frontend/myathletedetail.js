@@ -3,10 +3,13 @@ $(document).ready(function(){
     changeReceiveEth(price);
 
     $('#btn_file_upload').click(doOnUpload);
+
+    $('#form_change_price').css('width', (parseInt($('.athlete-card').width())+2)+'px');
+    $('#form_change_price').css('margin', 'auto');
 });
 
 doOnClickAthlete = function() {
-console.log(athlete_id, price, athlete_price);
+//console.log(athlete_id, price, athlete_price);
     var _min = athlete_price*1/2;
     var _max = athlete_price*1*2;
     $('input[name="athlete_id"]').val(athlete_id);
@@ -39,6 +42,7 @@ function readURL(input) {
             $('#imagePreview').fadeIn(650);
         }
         reader.readAsDataURL(input.files[0]);
+        $('#btn_file_upload').css('display', '');
     }
 }
 $("#imageUpload").change(function() {

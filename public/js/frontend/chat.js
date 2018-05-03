@@ -16,7 +16,11 @@ $(document).ready(function(){
                 console.log('listen', e);
             });
 
-
+        $('input[name="message"]').on('keyup', function(event){
+            if (event.keyCode == 13) {
+                doOnSendMessage();
+            }
+        })
 
     }
 });

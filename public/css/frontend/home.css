@@ -290,7 +290,7 @@ a:hover {
     font-weight:bold;
 }
 .dropdown-menu {
-    background: #12202f;
+    background: #151515;
 }
 .navbar-default{
     background: transparent;
@@ -300,12 +300,17 @@ a:hover {
     margin-bottom: 0;
 }
 .navbar-laravel {
-    background: linear-gradient(#000000ff, #00000000);
+    background: #151515;
+    /*background: linear-gradient(#000000ff, #00000000);*/
     position: fixed;
     top:0;
     width: 100%;
     z-index: 3;
     border:none;
+}
+.caret {
+    margin-left: 7px;
+    margin-top: 7px;
 }
 .dropdown-submenu{ position: relative; }
 
@@ -347,7 +352,7 @@ a:hover {
 .fantasy-button {
     position: relative;
     display: inline-block;
-    padding: 30px;
+    padding: 20px;
     margin: .3em 0 1em 0;
     /*width: 320px;*/
     vertical-align: middle;
