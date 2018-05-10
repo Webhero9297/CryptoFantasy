@@ -50,7 +50,7 @@
                 <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
             </button>
             <div class="div-auth-button-wrap">
-                <label class="label-auth-bottom-title">New to Moonfolio?</label>
+                <label class="label-auth-bottom-title">New to CryptoFantasy?</label>
                 <a href="{{ route('register') }}" class="nav-link a-join-here">JOIN HERE</a>
             </div>
         </div>

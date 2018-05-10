@@ -134,7 +134,8 @@
             @include('frontend.partial.athlete', ['athlete' => $athlete, 'provider' => $provider, 'contractAddress'=>$contractAddress, 'canBought'=>true])
 
 
-            @auth
+            @guest
+            @else
                 @if ( \Auth::user()->was_bought )
                     <script>
                         var chatting = true;
@@ -151,7 +152,7 @@
                             </div>
                         </div>
                 @endif
-            @endauth
+            @endguest
         </div>
         <div class="col-xs-12 col-sm-8">
             <div class="row">

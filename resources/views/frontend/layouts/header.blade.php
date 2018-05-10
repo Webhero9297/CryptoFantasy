@@ -380,7 +380,7 @@
     Athlete.init();
     var menu_data = <?php echo json_encode($menu_data); ?>;
 </script>
-<?php $limitN = 1; ?>
+<?php $limitN = 5; ?>
 <body>
 <div id="alertModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
