@@ -43,6 +43,7 @@ class CelebrityEditorController extends Controller
             $tree_data['items'] = $_teamData;
             $treeData[] = $tree_data;
         }
+
         return view('backend.celebrity.editor')->with(['tree_data'=>json_encode($treeData)]);
     }
     public function indexWithFilterKey() {
